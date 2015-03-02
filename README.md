@@ -3,8 +3,7 @@ maK_it-Linux-Rootkit
 ========================
 
 This is a simple rootkit implementation for the project described
-at the following locations
-http://blogs.computing.dcu.ie/wordpress/mak0/
+at the following location
 
 http://r00tkit.me
 
