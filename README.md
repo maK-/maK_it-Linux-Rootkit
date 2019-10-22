@@ -5,7 +5,7 @@ maK_it-Linux-Rootkit
 This is a simple rootkit implementation for the project described
 at the following location
 
-http://r00tkit.me
+https://web.archive.org/web/20190119045332/https://r00tkit.me/
 
 
 This rootkit avoids both the chkrootkit & rkhunter scanners as intended.
